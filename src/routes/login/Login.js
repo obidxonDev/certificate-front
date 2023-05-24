@@ -33,7 +33,7 @@ function Login() {
       <div className="login-container">
         <h2>Login To Algoritm Edu</h2>
         <form className='login-form' action="" onSubmit={handleLogin}>
-          <p style={{textAlign: 'center'}}>Ask The Site <Link to="https://t.me/ReactCoder" style={{textDecoration: 'none'}}>Owner</Link> To Create A Login Password To Create Sertificate</p>
+          <p style={{textAlign: 'center'}}>Ask The Site <Link to="https://t.me/ReactCoder" style={{textDecoration: 'none'}}>Owner</Link> To Create A Login Password For You To Enter System</p>
           <input required type="text" placeholder='Enter Login' value={login} onChange={(e) => setLogin(e.target.value)} />
           <input required type="text" placeholder='Enter Password' value={password} onChange={(e) => setPassword(e.target.value)} />
           <p style={{ color: 'red' }}>{errMsg && errMsg}</p>
