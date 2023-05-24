@@ -20,7 +20,6 @@ function Admins() {
     axios.get("/admins")
       .then(res => {
         setAdmins(res.data.innerData)
-        res.data.innerData.map(i => setIsOwner(i.role))
       })
       .catch(err => console.log(err))
   }, [])
@@ -33,6 +32,14 @@ function Admins() {
     }
   }, [counter]);
 
+  useEffect(() => {
+    axios.get("/admins/isOwner")
+      .then(res => {
+        setIsOwner(res.data.state)
+      })
+      .catch(err => console.log(err))
+  }, [])
+
   function handleGenerate(e) {
     e.preventDefault()
     axios.post("/admins/generatedLogin", { name, login, password })
@@ -44,14 +51,22 @@ function Admins() {
       .catch(err => console.log(err))
   }
 
+  function handleDeleteAdmin(id) {
+    axios.delete(`/admins/deleteadmin/${id}`)
+      .then(res => {
+        window.location.reload()
+      })
+      .catch(err => console.log(err))
+  }
+
   return (
     <React.Fragment>
-      {isOwner === "OWNER" ?
+      {isOwner ?
         <div className='admins-container'>
           <div className="admins-box">
             <div>
               {
-                admins?.map((i, id) => <div key={id} className='admi'>{i.name} <BsFillTrash3Fill onClick={() => dis({ type: "REMOVE__ADMIN" })} /></div>)
+                admins?.map((i, id) => <div key={id} className='admi'>{i.name} <BsFillTrash3Fill onClick={() => handleDeleteAdmin(i._id)} /></div>)
               }
             </div>
           </div>
