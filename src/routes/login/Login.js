@@ -26,7 +26,6 @@ function Login() {
         setErrMsg(err.response.data.msg)
       })
   }
-  setTimeout(() => { setErrMsg('') }, 5000)
 
   return (
     <div className='login'>
